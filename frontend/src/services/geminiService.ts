@@ -1,6 +1,6 @@
 import type { UserProfile, DailyAnalysisInput, ProfileBaseline, DailyReport } from "../types";
 
-const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
 export const analyzeProfile = async (profile: UserProfile): Promise<ProfileBaseline> => {
   try {
