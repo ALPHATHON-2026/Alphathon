@@ -97,6 +97,7 @@ def call_gemini(prompt: str):
         
         return json.loads(text_response)
     except Exception as e:
+         print(f"DEBUG: Gemini Analysis Error: {e}") # Added logging
          raise HTTPException(status_code=500, detail=f"Gemini analysis failed: {str(e)}")
 
 # --- Endpoints ---
