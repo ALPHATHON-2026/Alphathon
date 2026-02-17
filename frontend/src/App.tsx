@@ -6,7 +6,7 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { analyzeProfile, analyzeDaily } from './services/geminiService';
 import type { UserProfile, DailyAnalysisInput, ProfileBaseline, DailyReport } from './types';
 import { auth, db } from './firebase';
-import { signInWithEmailAndPassword, onAuthStateChanged, type User } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, type User } from 'firebase/auth';
 import { doc, setDoc, addDoc, collection, getDoc } from 'firebase/firestore';
 
 type AppState = 'home' | 'login' | 'profile' | 'baseline_reveal' | 'dashboard' | 'daily_input' | 'analysis_reveal';
@@ -20,6 +20,7 @@ const App: React.FC = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [foodPhoto, setFoodPhoto] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [isLoginMode, setIsLoginMode] = useState(true);
 
   // Local state for dynamic profile form
   const [selectedGender, setSelectedGender] = useState<'male' | 'female' | 'other'>('male');
@@ -66,7 +67,7 @@ const App: React.FC = () => {
     return null;
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget as HTMLFormElement);
     const email = formData.get('email') as string;
@@ -74,11 +75,14 @@ const App: React.FC = () => {
     
     setLoading(true);
     try {
-        await signInWithEmailAndPassword(auth, email, password);
-        // State change handled by onAuthStateChanged
+        if (isLoginMode) {
+            await signInWithEmailAndPassword(auth, email, password);
+        } else {
+            await createUserWithEmailAndPassword(auth, email, password);
+        }
     } catch (error: any) {
-        console.error("Login failed", error);
-        alert("Verification failed: " + error.message);
+        console.error("Auth failed", error);
+        alert(`${isLoginMode ? 'Login' : 'Registration'} failed: ` + error.message);
     } finally {
         setLoading(false);
     }
@@ -244,18 +248,25 @@ const App: React.FC = () => {
         <div className="relative z-10 min-h-screen flex items-center justify-center p-6">
           <GlassCard className="max-w-md w-full text-center py-20 px-12 border-white/5 shadow-[0_40px_100px_rgba(0,0,0,0.8)]">
             <h1 className="font-serif text-5xl mb-6 italic tracking-[0.1em] text-amber-500">ENTROPY</h1>
-            <p className="text-[9px] uppercase tracking-[0.6em] text-white/30 mb-16 italic">Calibration Access Point</p>
-            <form onSubmit={handleLogin} className="space-y-10">
+            <p className="text-[9px] uppercase tracking-[0.6em] text-white/30 mb-8 italic">Calibration Access Point</p>
+            
+            <div className="flex gap-4 justify-center mb-8">
+                <button onClick={() => setIsLoginMode(true)} className={`text-[10px] uppercase tracking-widest ${isLoginMode ? 'text-amber-500 font-bold' : 'text-white/30'}`}>Login</button>
+                <div className="w-[1px] h-3 bg-white/10"></div>
+                <button onClick={() => setIsLoginMode(false)} className={`text-[10px] uppercase tracking-widest ${!isLoginMode ? 'text-amber-500 font-bold' : 'text-white/30'}`}>Sign Up</button>
+            </div>
+
+            <form onSubmit={handleAuth} className="space-y-10">
               <div className="space-y-3 text-left">
                 <label className="text-[9px] uppercase tracking-[0.4em] opacity-40 ml-1 font-black">Reference Identity</label>
                 <input name="email" type="email" required placeholder="name@sanctuary.io" className="w-full p-5 rounded-sm bg-white/5 border border-white/10 text-xs tracking-widest placeholder:opacity-20" />
               </div>
               <div className="space-y-3 text-left">
-                <label className="text-[9px] uppercase tracking-[0.4em] opacity-40 ml-1 font-black">Key Phrase</label>
-                <input name="password" type="password" required placeholder="Your hidden rhythm" className="w-full p-5 rounded-sm bg-white/5 border border-white/10 text-xs tracking-widest placeholder:opacity-20" />
+                <label className="text-[9px] uppercase tracking-[0.4em] opacity-40 ml-1 font-black">Password</label>
+                <input name="password" type="password" required placeholder="Enter secure phrase..." className="w-full p-5 rounded-sm bg-white/5 border border-white/10 text-xs tracking-widest placeholder:opacity-20" />
               </div>
               <button type="submit" className="w-full py-6 bg-amber-500 text-black font-black uppercase text-[11px] tracking-[0.7em] hover:bg-amber-400 transition-all duration-700 shadow-[0_15px_40px_rgba(245,158,11,0.2)]">
-                Verify Pulse
+                {isLoginMode ? 'Verify Pulse' : 'Initiate Sequence'}
               </button>
             </form>
           </GlassCard>
