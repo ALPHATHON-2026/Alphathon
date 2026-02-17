@@ -9,7 +9,7 @@ const Dashboard: React.FC = () => {
         <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 text-primary bg-sand rounded-full flex items-center justify-center">
-              <span className="material-symbols-outlined text-[20px]">spa</span>
+              <span className="material-symbols-outlined text-[20px]">SPA</span>
             </div>
             <h1 className="text-sand text-xl font-bold tracking-tight">Dosha Balance</h1>
           </div>
