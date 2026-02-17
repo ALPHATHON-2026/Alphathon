@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const FoodAnalysis: React.FC = () => {
   return (
-    <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen overflow-hidden flex">
+    <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen overflow-hidden flex animate-fade-in">
       {/* Navigation Rail */}
       <aside className="w-20 lg:w-64 flex-shrink-0 bg-[#121611] border-r border-white/5 flex flex-col justify-between transition-all duration-300 z-50">
         <div className="flex flex-col gap-8 p-4">

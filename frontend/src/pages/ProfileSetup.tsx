@@ -6,7 +6,7 @@ const ProfileSetup: React.FC = () => {
   const [weight, setWeight] = useState(68);
 
   return (
-    <div className="bg-background-dark text-white font-display antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary selection:text-white">
+    <div className="bg-background-dark text-white font-display antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary selection:text-white animate-fade-in">
       {/* Background Image Layer */}
       <div className="fixed inset-0 z-0">
         <div

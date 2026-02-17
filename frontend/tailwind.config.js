@@ -25,10 +25,10 @@ export default {
         "glass-stroke": "rgba(255, 255, 255, 0.1)",
       },
       fontFamily: {
-        "display": ["Manrope", "sans-serif"],
-        "serif": ["Playfair Display", "serif"],
-        "body": ["Manrope", "sans-serif"],
-        "sans": ["Noto Sans", "sans-serif"],
+        "display": ["Cinzel", "serif"],
+        "serif": ["Cinzel", "serif"],
+        "body": ["Unna", "serif"],
+        "sans": ["Unna", "serif"],
       },
       backgroundImage: {
         'botanical-pattern': "url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=2727&auto=format&fit=crop')",

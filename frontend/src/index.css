@@ -3,48 +3,40 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    font-family: 'Manrope', sans-serif;
+  body {
+    margin: 0;
+    padding: 0;
+    background: #020301;
+    color: #e5e5e5;
+    font-family: 'Unna', serif;
+    overflow-x: hidden;
   }
 }
 
-/* Custom styles for video background and glassmorphism */
-.video-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
+.font-serif {
+    font-family: 'Cinzel', serif;
 }
 
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(23, 28, 22, 0.3), rgba(23, 28, 22, 0.7));
-    z-index: 1;
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.3);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 10px;
 }
 
-.glass-card {
-    background: rgba(46, 71, 41, 0.15); /* Primary tint */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+/* Form Styles */
+input, select, textarea {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    transition: all 0.3s ease;
 }
-
-.text-shadow-sm {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+input:focus, select:focus, textarea:focus {
+    border-color: rgba(245, 158, 11, 0.5) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    outline: none;
 }

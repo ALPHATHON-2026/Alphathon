@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const HealthReport: React.FC = () => {
   return (
-    <div className="bg-forest-dark text-white font-display overflow-x-hidden min-h-screen flex flex-col selection:bg-primary selection:text-forest-dark">
+    <div className="bg-forest-dark text-white font-display overflow-x-hidden min-h-screen flex flex-col selection:bg-primary selection:text-forest-dark animate-fade-in">
       {/* Background Ambient Effects */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         {/* Abstract gradient blob 1 */}

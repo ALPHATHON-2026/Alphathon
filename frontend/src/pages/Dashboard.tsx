@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="bg-background-dark text-sand font-display overflow-x-hidden min-h-screen flex flex-col">
+    <div className="bg-background-dark text-sand font-display overflow-x-hidden min-h-screen flex flex-col animate-fade-in">
       {/* Top Navigation */}
       <header className="w-full border-b border-[#323b30] bg-[#181c17]/90 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
